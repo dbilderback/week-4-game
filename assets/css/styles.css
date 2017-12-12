@@ -1,0 +1,100 @@
+.container {
+    max-width: 960px;
+    background-image: url("../images/bg.jpg");
+    width: 960px;
+    height: 540px;
+}
+
+.title {
+    color: white;
+}
+
+.yourCharOptions img {
+    width: 100px;
+    height: 100px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.yourCharOptions {
+    display: inline-flex;
+}
+
+.yourCharOptionsLabel {
+    color: white;
+}
+
+.yourChar img {
+    width: 100px;
+    height: 100px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.youCharLabel {
+    display: none;
+    color: white;
+}
+
+.character {
+    position: relative;
+}
+
+.enemies {
+    display: inline-flex;
+}
+
+.enemies img {
+    width: 100px;
+    height: 100px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.enemiesLabel h3 {
+    color: white;
+    display: none;
+}
+
+.fightSelection img {
+    width: 100px;
+    height: 100px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.defenderLabel {
+    color: white;
+}
+
+.fightSelection {
+    color: white;
+}
+
+.gameText {
+    z-index: 1;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin-left: -70px;
+    margin-right: auto;
+    /*demo*/
+    bottom: 10px;
+    max-width:100px;
+    text-align:center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
+.attackButton {
+    display: none;
+}
+
+h3 {
+    color: white;
+}
