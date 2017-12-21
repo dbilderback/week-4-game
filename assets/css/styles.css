@@ -2,7 +2,7 @@
     max-width: 960px;
     background-image: url("../images/bg.jpg");
     width: 960px;
-    height: 540px;
+    height: 600px;
 }
 
 .title {
@@ -59,7 +59,7 @@
     display: none;
 }
 
-.fightSelection img {
+.defender img {
     width: 100px;
     height: 100px;
     border-color: white;

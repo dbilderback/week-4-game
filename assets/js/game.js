@@ -1,65 +1,70 @@
+var defenderHealth = 0;
+var attackerHealth = 0;
+var attackerPower = 0;
+var attackerPowerFactor = 0;
+
 var charactersObject = {
-        obi: {
-          namePlayer: "Obi Wan Kenobi",
-          imgSource: "assets/images/obi.jpg",
-          nameId: "obi",
-          health: 100,
-          attackPower: 8,
-          attackPowerFactor: 8,
-          counterAttack: 25,
-          isDefender: false,
-          isEnemy: false,
-          isHero: false,
-          clickEvent: function( event ){
+    obi: {
+        namePlayer: "Obi Wan Kenobi",
+        imgSource: "assets/images/obi.jpg",
+        nameId: "obi",
+        health: 100,
+        attackPower: 8,
+        attackPowerFactor: 8,
+        counterAttack: 25,
+        isDefender: false,
+        isEnemy: false,
+        isHero: false,
+        clickEvent: function(event) {
             selectChar($(this));
         },
-        },
-        bob: {
-          namePlayer: "Boba Fett",
-          imgSource: "assets/images/boba.jpg",
-          nameId: "bob",
-          health: 120,
-          attackPower: 7,
-          attackPowerFactor: 7,
-          counterAttack: 25,
-          isDefender: false,
-          isEnemy: false,
-          isHero: false,
-          clickEvent: function( event ){
+    },
+    bob: {
+        namePlayer: "Boba Fett",
+        imgSource: "assets/images/boba.jpg",
+        nameId: "bob",
+        health: 120,
+        attackPower: 7,
+        attackPowerFactor: 7,
+        counterAttack: 25,
+        isDefender: false,
+        isEnemy: false,
+        isHero: false,
+        clickEvent: function(event) {
             selectChar($(this));
         },
-        },
-        dar: {
-          namePlayer: "Darth Vader",
-          imgSource: "assets/images/dv.jpg",
-          nameId: "dar",
-          health: 180,
-          attackPower: 5,
-          attackPowerFactor: 5,
-          counterAttack: 25,
-          isDefender: false,
-          isEnemy: false,
-          isHero: false,
-          clickEvent: function( event ){
+    },
+    dar: {
+        namePlayer: "Darth Vader",
+        imgSource: "assets/images/dv.jpg",
+        nameId: "dar",
+        health: 180,
+        attackPower: 5,
+        attackPowerFactor: 5,
+        counterAttack: 25,
+        isDefender: false,
+        isEnemy: false,
+        isHero: false,
+        clickEvent: function(event) {
             selectChar($(this));
         },
-        },
-        sit: {
-          namePlayer: "Lord Sith",
-          imgSource: "assets/images/sith.jpg",
-          nameId: "sit",
-          health: 100,
-          attackPower: 8,
-          attackPowerFactor: 8,
-          counterAttack: 25,
-          isDefender: false,
-          isEnemy: false,
-          isHero: false,
-          clickEvent: function( event ){
+    },
+    sit: {
+        namePlayer: "Lord Sith",
+        imgSource: "assets/images/sith.jpg",
+        nameId: "sit",
+        health: 100,
+        attackPower: 8,
+        attackPowerFactor: 8,
+        counterAttack: 25,
+        isDefender: false,
+        isEnemy: false,
+        isHero: false,
+        clickEvent: function(event) {
             selectChar($(this));
         },
-        }
-    };
+    }
+};
 
 // This function initiates the game to a start state 
 function gameStart() {
@@ -68,7 +73,6 @@ function gameStart() {
         //Check for null
         if (!charactersObject.hasOwnProperty(key)) continue;
         //Create the variables to be used
-        var obj = charactersObject[key];
         var character = charactersObject[key].nameId;
         var charImgSource = charactersObject[key].imgSource;
         var divId = (charactersObject[key].nameId + 'Div')
@@ -115,27 +119,27 @@ function selectChar(element) {
         if (!charactersObject.hasOwnProperty(key)) continue;
         if (element["0"].id !== charactersObject[key].nameId) {
             var characterName = charactersObject[key].namePlayer;
-        $('#yourCharLabel h3').html('Good Luck You Selected ' + characterName);
-        $('#yourCharLabel').show();
-        var test = $('#' + charactersObject[key].id + 'Div');
-        var test2 = ('#' + charactersObject[key].id + 'Div');
-        console.log(test);
-        console.log(test2);
-        console.log($('#' + charactersObject[key].id + 'Div'));
-        var divElement = $('#' + charactersObject[key].nameId + 'Div');
-        var childElement = divElement.children('img')[0];
-        $(childElement).unbind();
-        $(childElement).prependTo(divElement);
-        $(childElement).bind('click', function( event ) {
-            selectDefender($(this));
-        });
-        $(childElement).prependTo(divElement);
-        $(divElement).appendTo('#enemies');
-        $('#yourCharOptionsLabel h3').hide();
-        $('#enemiesLabel h3').html('Select Your First Opponent To Fight');
-        $('#enemiesLabel h3').show();    
-        }
+            $('#yourCharLabel h3').html('Good Luck You Selected ' + characterName);
+            $('#yourCharLabel').show();
+            var divElement = $('#' + charactersObject[key].nameId + 'Div');
+            var childElement = divElement.children('img')[0];
+            $(childElement).unbind();
+            $(childElement).prependTo(divElement);
+            $(childElement).bind('click', function(event) {
+                selectDefender($(this));
+            });
+            $(childElement).prependTo(divElement);
+            $(divElement).appendTo('#enemies');
+            $('#yourCharOptionsLabel h3').hide();
+            $('#enemiesLabel h3').html('Select Your First Opponent To Fight');
+            $('#enemiesLabel h3').show();
+        } else {
+            attackerHealth = charactersObject[key].health;
+            attackerPower = charactersObject[key].attackPower;
+            attackerPowerFactor = charactersObject[key].attackPowerFactor;
             
+        }
+
     }
 }
 
@@ -146,67 +150,102 @@ function selectDefender(element) {
     var imgElement = $(imgId);
     divElement = $(imgId + 'Div');
     console.log(imgElement);
-    $(divElement).appendTo('#fightSelection');
-    $('#fightSelection img').each(function () {
+    defenderHealth = charactersObject[element["0"].id].health;
+    $(divElement).appendTo('#defender');
+    $('#defender img').each(function() {
         $(this).unbind();
         //$('#fightSelection').append(this);
         $(this).prependTo(divElement);
     });
     //Iterate through the remaining characters 
     //Remove and bound events and re-append to the #enemies div
-    $('#enemies img').each(function () {
+    $('#enemies img').each(function() {
         $(this).unbind();
         $(this).prependTo('#' + this.id + 'Div');
     });
     $('#enemiesLabel').html('Enemies Left To Fight');
-    $('#attackButton').bind('click', function( event ){
+    $('#attackButton').bind('click', function(event) {
         attackDefender();
     });
     $('#attackButton').appendTo('#attackButtonContainer');
     $('#attackButton').show();
-    $('#defenderLabel h3').html('Defender')
 }
 
 //The purpose of this function is to respond to user's click of the Attack button
 function attackDefender() {
-  $('#yourChar img').each(function () {
-    var yourChar = this.id;
-    var attackPower = charactersObject[yourChar].attackPower;
-    var attackPowerFactor = charactersObject[yourChar].attackPowerFactor;
-    $('#fightSelection img').each(function () {
-      var defender = this.id;
-      var healthPoints = charactersObject[defender].health;
-      charactersObject[defender].health -= attackPower;
-      charactersObject[yourChar].attackPower += attackPowerFactor;
-      $('#fightSelection span').text(charactersObject[defender].health);
-      if (checkHealth(defender) == true) {
-        $('#attackButton').unbind();
-        $('#attackButton').val('Game Over')
-        $('#attackButton').appendTo('#attackButtonContainer');
-      }
-      //checkHealth(defender);
-      defenderAttack(yourChar, defender);
+    $('#yourChar img').each(function() {
+        var yourChar = this.id;
+        $('#defender img').each(function() {
+            var defender = this.id;
+            //var healthPoints = 
+            defenderHealth -= attackerPower;
+            attackerPower += attackerPowerFactor;
+            $('#defender span').text(defenderHealth);
+            if (checkHealth(defenderHealth) == true) {
+                $('#attackButton').unbind();
+                $('#attackButton').appendTo('#attackButtonContainer');
+                $('#attackButton').hide();
+                $('#yourCharLabel h3').html('You Have Defeated Your Opponent, Select Your Next Character To Fight');
+                $('#yourCharLabel').show();
+                $('#defender').empty();
+                $('#attackButton').hide();            
+                resetGame();
+            }
+            defenderAttack(yourChar, defender);
+        });
     });
-  });    
 }
 
-function checkHealth(character) {
-  if (charactersObject[character].health <= 0) {
-    return true;
-  }
+function checkHealth(health) {
+    if (health <= 0) {
+        return true;
+    }
 
 }
 
 function defenderAttack(yourChar, defender) {
-  charactersObject[yourChar].health -= charactersObject[defender].counterAttack;
-  $('#yourChar span').text(charactersObject[yourChar].health);
-  if (checkHealth(yourChar) == true) {
-    console.log('loss');
-    $('#attackButton').unbind();
-    $('#attackButton').val('Game Over')
-    $('#attackButton').bind('click', function( event ){
-        gameStart();
-    });
-    $('#attackButton').appendTo('#attackButtonContainer');
-  }
+    attackerHealth -= charactersObject[defender].counterAttack;
+    $('#yourChar span').text(attackerHealth);
+    if (checkHealth(attackerHealth) == true) {
+        console.log('loss');
+        $('#attackButton').unbind();
+        $('#attackButton').val('Game Over')
+        $('#attackButton').bind('click', function(event) {
+            clearGameBoard();
+            gameStart();
+        });
+        $('#attackButton').appendTo('#attackButtonContainer');
+    }
+}
+
+//This is a reusable function that creates UI elements
+function createElement(id, cssClass, type, text, parent) {
+    var divElement = $(type);
+    divElement.attr('class', cssClass);
+    divElement.attr('id', id);
+    divElement.text(text);  
+    $('#' + parent).append(divElement);
+}
+
+    //This is a reusable function that binds events to elements
+function bindEvent(elementID, event, eventType, parent) {
+    var bindElement = $('#' + elementID);
+    bindElement.bind(eventType, event);
+    $('#' + elementID).appendTo('#' + parent);
+    
+}
+
+    //This function removes the children elements of the game board
+function clearGameBoard() {
+    $('#yourCharOptions').empty();
+    $('#yourChar').empty();
+    $('#enemies').empty();
+    $('#defender').empty();
+    $('#attackButtonContainer').empty();
+}
+
+function resetGame() {
+    $('#enemies img').bind('click', function(event) {
+    selectDefender($(this));
+});
 }
